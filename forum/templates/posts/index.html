@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block header %}
+    <div class="col-10">
+        <div class="row justify-content-center">
+            <h2>{% block title %}Posts{% endblock %}</h2>
+        </div>
+    </div>
+    {% if not user is None %}
+        <div class="col-2">
+            <div class="row justify-content-end p-1">
+                <a class="btn btn-warning btn-sm" href="/forum/post/create/" role="button">new</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="row p-1">
+            <div class="col-2">
+                <div class="row"><h5><a href="/forum/stat/user/{{ post.author.id }}"
+                                        class="text-white">{{ post.author.username }}</a></h5></div>
+                <div class="row"><small><i>Posted on</i></small></div>
+                <div class="row"><small><i> {{ post.create_date }} </i></small></div>
+                {% if post.modification %}
+                    <div class="row mt-1"><small><i>Last modified on</i></small></div>
+                    <div class="row"><small><i> {{ post.modified }} </i></small></div>
+                {% endif %}
+            </div>
+            <div class="col-10">
+                <div class="row align-items-center">
+                    <div class="col-8"><h4>{{ post.title }}</h4></div>
+                    <div class="col-4">
+                        {% if user.id == post.author.id %}
+                            <div class="row justify-content-end">
+                                <a class="btn btn-primary btn-sm mr-1"
+                                   href="/forum/post/{{ post.id }}/update/" role="button">edit</a>
+                                <form action="/forum/post/{{ post.id }}/delete/" method="post">
+                                    {% csrf_token %}
+                                    <input
+                                            class="btn btn-outline-danger btn-sm"
+                                            role="button"
+                                            type="submit"
+                                            onclick="return confirm('Are you sure?');"
+                                            value="delete"
+                                    >
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">{{ post.body }}</div>
+            </div>
+        </div>
+
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

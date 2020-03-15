@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="col-11 ">
+        <div class="row justify-content-center">
+            <h2>{% block title %}New Post{% endblock %}</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-2">
+                <div class="row justify-content-end">
+                    <label for="title"><b>Title</b></label>
+                </div>
+            </div>
+            <div class="col-10">
+                <input
+                        name="title"
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        placeholder="Enter post title"
+                        value="{% if not title is None %} {{ title }}}{% else %}{% endif %}"
+                        required
+                >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="row justify-content-end">
+                    <label for="body"><b>Body</b></label>
+                </div>
+            </div>
+            <div class="col-10">
+                <textarea name="body" class="form-control" id="body" rows="5"
+                          placeholder="Enter post body">{% if not body is None %}
+                    {{ body }}{% else %}{% endif %}</textarea>
+            </div>
+        </div>
+        <div class="row align-items-center mt-1">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <input type="submit" class="btn btn-warning btn-sm" value="save">
+            </div>
+        </div>
+    </form>
+{% endblock %}
