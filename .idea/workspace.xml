@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f6d3bbd-0a07-4d47-903f-d26bdbc6c2be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1edd4f35-ffc9-4435-a30b-35f71b3d4e04.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1edd4f35-ffc9-4435-a30b-35f71b3d4e04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forum/migrations/0009_auto_20200322_1820.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forum/templates/posts/comments/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forum/templates/posts/comments/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forum/templates/posts/comments/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/forum/views/comments.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/templates/posts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/posts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/stat.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/stat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/templates/stats/user_stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/stats/user_stats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,12 +75,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZA65TUEtxAYPbFRDOU0KV6JcLO" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/forum/templates/posts/comments" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -89,6 +93,10 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Wawra\Documents\STUDIA INFORMATYKA PB\Semestr 6\Rozwiązania Szkieletowe w Tworzeniu Aplikacji WWW\PS\projekt\forum\mysite\forum\templates\posts\comments" />
+      <recent name="C:\Users\Wawra\Documents\STUDIA INFORMATYKA PB\Semestr 6\Rozwiązania Szkieletowe w Tworzeniu Aplikacji WWW\PS\projekt\forum\mysite\forum\views" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Wawra\Documents\STUDIA INFORMATYKA PB\Semestr 6\Rozwiązania Szkieletowe w Tworzeniu Aplikacji WWW\PS\projekt\forum\mysite\forum\views" />
     </key>
@@ -143,7 +151,7 @@
       <updated>1584269367275</updated>
       <workItem from="1584269368411" duration="17055000" />
       <workItem from="1584290457303" duration="676000" />
-      <workItem from="1584891778240" duration="3193000" />
+      <workItem from="1584891778240" duration="8493000" />
     </task>
     <servers />
   </component>
@@ -162,5 +170,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Python.DjangoServer">
+        <watch expression="context['posts']" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

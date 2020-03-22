@@ -1,6 +1,6 @@
 from django.urls import path
 
-from forum.views import stat, auth, posts
+from forum.views import stat, auth, posts, comments
 
 urlpatterns = [
     path('', posts.index, name='index'),
@@ -12,4 +12,7 @@ urlpatterns = [
     path('post/create/', posts.create, name='create'),
     path('post/<int:post_id>/update/', posts.update, name='update'),
     path('post/<int:post_id>/delete/', posts.delete, name='delete'),
+    path('post/<int:post_id>/comments/add', comments.add, name='add'),
+    path('post/<int:post_id>/comments/<int:comment_id>/edit', comments.edit, name='add'),
+    path('post/<int:post_id>/comments/<int:comment_id>/delete', comments.delete, name='add')
 ]

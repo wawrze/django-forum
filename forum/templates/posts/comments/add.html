@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="col-11 ">
+        <div class="row justify-content-center">
+            <h2>{% block title %}Comment post{% endblock %}</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row p-1">
+        <div class="col-2">
+            <div class="row">
+                <h5><a href="/stat/user/{{ post.author.id }}" class="text-white">{{ post.author.username }}</a></h5>
+            </div>
+            <div class="row"><small><i>Posted on</i></small></div>
+            <div class="row"><small><i> {{ post.create_date }} </i></small></div>
+            {% if post.modification %}
+                <div class="row mt-1"><small><i>Last modified on</i></small></div>
+                <div class="row"><small><i> {{ post.modified }} </i></small></div>
+            {% endif %}
+        </div>
+        <div class="col-10">
+            <div class="row align-items-center">
+                <div class="col-8"><h4>{{ post.title }}</h4></div>
+            </div>
+            <hr/>
+            <div class="row">{{ post.body }}</div>
+
+            {% if post.comment_count > 0 %}
+                <hr/>
+                <div>
+                    <h6>Comments:</h6>
+                    {% for comment in post.comment_set.all %}
+                        <hr/>
+                        <div class="row small">{{ comment.body }}</div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-8">
+                                <small><i>Posted on {{ comment.create_date }}
+                                    by {{ comment.author.username }}</i></small>
+                                <br/>
+                                {% if comment.modification %}
+                                    <small><i>Last modified on {{ comment.modified }}</i></small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+    <hr/>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-2">
+                <div class="row justify-content-end">
+                    <label for="body"><b>Comment</b></label>
+                </div>
+            </div>
+            <div class="col-10">
+                <textarea name="body" class="form-control" id="body" rows="5" placeholder="Enter comment"></textarea>
+            </div>
+        </div>
+        <div class="row align-items-center mt-1">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <input type="submit" class="btn btn-warning btn-sm" value="save">
+            </div>
+        </div>
+    </form>
+{% endblock %}

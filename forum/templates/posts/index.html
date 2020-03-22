@@ -51,6 +51,55 @@
                 </div>
                 <hr/>
                 <div class="row">{{ post.body }}</div>
+                {% if not user is None %}
+                    <br/>
+                    <div class="row justify-content-end">
+                        <a class="btn btn-outline-warning btn-sm" href="/post/{{ post.id }}/comments/add"
+                           role="button">
+                            comment
+                        </a>
+                    </div>
+                {% endif %}
+                {% if post.comment_count > 0 %}
+                    <hr/>
+                    <div>
+                        <h6>Comments:</h6>
+                        {% for comment in post.comment_set.all %}
+                            <hr/>
+                            <div class="row small">{{ comment.body }}</div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-8">
+                                    <small><i>Posted on {{ comment.create_date }}
+                                        by {{ comment.author.username }}</i></small>
+                                    <br/>
+                                    {% if comment.modification %}
+                                        <small><i>Last modified on {{ comment.modified }}</i></small>
+                                    {% endif %}
+                                </div>
+                                <div class="col-4">
+                                    {% if user.id == comment.author.id %}
+                                        <div class="row justify-content-end">
+                                            <a class="btn btn-primary btn-sm mr-1"
+                                               href="/post/{{ post.id }}/comments/{{ comment.id }}/edit" role="button">edit</a>
+                                            <form action="/post/{{ post.id }}/comments/{{ comment.id }}/delete"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                <input
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        role="button"
+                                                        type="submit"
+                                                        onclick="return confirm('Are you sure?');"
+                                                        value="delete"
+                                                >
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 
