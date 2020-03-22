@@ -6,6 +6,7 @@
       <change afterPath="$PROJECT_DIR$/forum/static/pl.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/auth/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/auth/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/base.html" afterDir="false" />
@@ -160,7 +161,7 @@
       <updated>1584269367275</updated>
       <workItem from="1584269368411" duration="17055000" />
       <workItem from="1584290457303" duration="676000" />
-      <workItem from="1584891778240" duration="14015000" />
+      <workItem from="1584891778240" duration="14167000" />
     </task>
     <servers />
   </component>

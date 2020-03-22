@@ -25,11 +25,27 @@ def get_language(request):
 
 def set_lang_pl(request):
     request.session['language'] = 'pl'
+    try:
+        user_id = request.session['user_id']
+        user = User.objects.get(id=user_id)
+    except KeyError:
+        user = None
+    if user is not None:
+        user.language = 'pl'
+        user.save()
     return redirect('/')
 
 
 def set_lang_en(request):
     request.session['language'] = 'en'
+    try:
+        user_id = request.session['user_id']
+        user = User.objects.get(id=user_id)
+    except KeyError:
+        user = None
+    if user is not None:
+        user.language = 'en'
+        user.save()
     return redirect('/')
 
 
@@ -98,6 +114,7 @@ def login(request):
         if error is None:
             request.session.clear()
             request.session['user_id'] = user.id
+            request.session['language'] = user.language
             return redirect('/')
 
     errors = []

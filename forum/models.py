@@ -6,6 +6,7 @@ class User(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
     username = models.CharField(max_length=200, unique=True, null=False)
     password = models.CharField(max_length=200, null=True)
+    language = models.CharField(max_length=2, null=True)
     created = models.DateTimeField(null=False, default=now)
 
     @property
