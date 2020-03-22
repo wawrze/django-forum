@@ -3,7 +3,7 @@
 {% block header %}
     <div class="col-11">
         <div class="row justify-content-center">
-            <h2>{% block title %}User{% endblock %}<small class="quote">{{ stats_owner.username }}</small> statistics
+            <h2>{% block title %}User{% endblock %} <small class="quote">{{ stats_owner.username }}</small> statistics
             </h2>
         </div>
     </div>
@@ -36,13 +36,27 @@
             </td>
         </tr>
         <tr>
+            <td class="td-25" rowspan="2"><h3>Comments</h3></td>
+            <td><strong>Number of comments:</strong></td>
+            <td class="td-right">{{ comments_count }}</td>
+        </tr>
+        <tr>
+            <td><strong>Comments per day:</strong></td>
+            <td class="td-right">{{ comments_per_day }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr/>
+            </td>
+        </tr>
+        <tr>
             <td class="td-25" rowspan="2"><h3>Words</h3></td>
             <td><strong>Number of words:</strong></td>
             <td class="td-right">{{ words_count }}</td>
         </tr>
         <tr>
             <td><strong>Words per post:</strong></td>
-            <td class="td-right">{{ words_per_post }}</td>
+            <td class="td-right">{{ words_per_post_and_comment }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
@@ -61,7 +75,7 @@
         </tr>
         <tr>
             <td><strong>Characters per post:</strong></td>
-            <td class="td-right">{{ chars_per_post }}</td>
+            <td class="td-right">{{ chars_per_post_and_comment }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>

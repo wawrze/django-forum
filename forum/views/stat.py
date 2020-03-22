@@ -19,19 +19,22 @@ def general(request):
     posts_count = Post.objects.count()
     if posts_count == 0:
         posts_count = 1
+    comments_count = Comment.objects.count()
 
     try:
         post_titles = Post.objects.values('title').all()
         posts_bodies = Post.objects.values('body').all()
+        comment_bodies = Comment.objects.values('body').all()
         all_texts = ''
-        chars_count = 0
         for i in range(posts_count):
             all_texts += ' '
-            all_texts += post_titles[0]['title']
-            chars_count += len(post_titles[0]['title'])
+            all_texts += post_titles[i]['title']
             all_texts += ' '
-            all_texts += posts_bodies[1]['body']
-            chars_count += len(posts_bodies[1]['body'])
+            all_texts += posts_bodies[i]['body']
+        for i in range(comments_count):
+            all_texts += ' '
+            all_texts += comment_bodies[i]['body']
+        chars_count = len(all_texts)
         words_count = len(all_texts.split())
     except Post.DoesNotExist:
         words_count = 1
@@ -43,12 +46,15 @@ def general(request):
 
     posts_per_day = round(posts_count / days, 2)
     posts_per_user = round(posts_count / users_count, 2)
-    words_per_post = round(words_count / posts_count, 2)
+    words_per_post_and_comment = round(words_count / (posts_count + comments_count), 2)
     words_per_day = round(words_count / days, 2)
     words_per_user = round(words_count / users_count, 2)
-    chars_per_post = round(chars_count / posts_count, 2)
+    chars_per_post_and_comment = round(chars_count / (posts_count + comments_count), 2)
     chars_per_day = round(chars_count / days, 2)
     chars_per_user = round(chars_count / users_count, 2)
+    comments_per_post = round(comments_count / posts_count, 2)
+    comments_per_day = round(comments_count / days, 2)
+    comments_per_user = round(comments_count / users_count, 2)
 
     template = loader.get_template('stats/general_stats.html')
     context = {
@@ -57,14 +63,18 @@ def general(request):
         'days': days,
         'posts_count': posts_count,
         'users_count': users_count,
+        'comments_count': comments_count,
         'words_count': words_count,
         'chars_count': chars_count,
         'posts_per_day': posts_per_day,
         'posts_per_user': posts_per_user,
-        'words_per_post': words_per_post,
+        'comments_per_post': comments_per_post,
+        'comments_per_day': comments_per_day,
+        'comments_per_user': comments_per_user,
+        'words_per_post_and_comment': words_per_post_and_comment,
         'words_per_day': words_per_day,
         'words_per_user': words_per_user,
-        'chars_per_post': chars_per_post,
+        'chars_per_post_and_comment': chars_per_post_and_comment,
         'chars_per_day': chars_per_day,
         'chars_per_user': chars_per_user,
     }
@@ -81,33 +91,38 @@ def user(request, user_id):
     days = (now() - stats_owner.created).days
     if days == 0:
         days = 1
-    user_posts_count = Post.objects.filter(author=stats_owner).count()
 
+    user_posts_count = Post.objects.filter(author=stats_owner).count()
     if user_posts_count == 0:
         user_posts_count = 1
+
+    user_comments_count = Comment.objects.filter(author=stats_owner).count()
 
     try:
         post_titles = Post.objects.filter(author=stats_owner).values('title').all()
         posts_bodies = Post.objects.filter(author=stats_owner).values('body').all()
+        comments_bodies = Comment.objects.filter(author=stats_owner).values('body').all()
         all_texts = ''
-        user_chars_count = 0
         for i in range(user_posts_count):
             all_texts += ' '
-            all_texts += post_titles[0]['title']
-            user_chars_count += len(post_titles[0]['title'])
+            all_texts += post_titles[i]['title']
             all_texts += ' '
-            all_texts += posts_bodies[1]['body']
-            user_chars_count += len(posts_bodies[1]['body'])
+            all_texts += posts_bodies[i]['body']
+        for i in range(user_comments_count):
+            all_texts += ' '
+            all_texts += comments_bodies[i]['body']
+        user_chars_count = len(all_texts)
         user_words_count = len(all_texts.split())
     except Post.DoesNotExist:
         user_words_count = 1
         user_chars_count = 1
 
     posts_per_day = round(user_posts_count / days, 2)
-    words_per_post = round(user_words_count / user_posts_count, 2)
+    words_per_post_and_comment = round(user_words_count / (user_posts_count + user_comments_count), 2)
     words_per_day = round(user_words_count / days, 2)
-    chars_per_post = round(user_chars_count / user_posts_count, 2)
+    chars_per_post_and_comment = round(user_chars_count / (user_posts_count + user_comments_count), 2)
     chars_per_day = round(user_chars_count / days, 2)
+    comments_per_day = round(user_comments_count / days, 2)
 
     template = loader.get_template('stats/user_stats.html')
     context = {
@@ -117,11 +132,13 @@ def user(request, user_id):
         'stats_owner': stats_owner,
         'posts_count': user_posts_count,
         'words_count': user_words_count,
+        'comments_count': user_comments_count,
         'chars_count': user_chars_count,
         'posts_per_day': posts_per_day,
-        'words_per_post': words_per_post,
+        'comments_per_day': comments_per_day,
+        'words_per_post_and_comment': words_per_post_and_comment,
         'words_per_day': words_per_day,
-        'chars_per_post': chars_per_post,
+        'chars_per_post_and_comment': chars_per_post_and_comment,
         'chars_per_day': chars_per_day
     }
     return HttpResponse(template.render(context, request))
