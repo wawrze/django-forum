@@ -33,7 +33,7 @@ def register(request):
         if error is None:
             user = User(username=username, password=pwd_helper.hash_password(password))
             user.save()
-            return redirect('/forum/login/')
+            return redirect('/login/')
 
     errors = []
     if error is not None:
@@ -62,7 +62,7 @@ def login(request):
         if error is None:
             request.session.clear()
             request.session['user_id'] = user.id
-            return redirect('/forum/')
+            return redirect('/')
 
     errors = []
     if error is not None:
@@ -77,4 +77,4 @@ def login(request):
 
 def logout(request):
     request.session.clear()
-    return redirect('/forum/')
+    return redirect('/')

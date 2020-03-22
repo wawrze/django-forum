@@ -20,7 +20,7 @@ def index(request):
 def create(request):
     user = get_user(request)
     if user is None:
-        redirect('/forum/login')
+        redirect('/login')
 
     error = None
     title = None
@@ -33,7 +33,7 @@ def create(request):
         else:
             post = Post(title=title, body=body, author=user)
             post.save()
-            return redirect('/forum')
+            return redirect('/')
 
     errors = []
     if error is not None:
@@ -51,14 +51,14 @@ def create(request):
 def update(request, post_id):
     user = get_user(request)
     if user is None:
-        return redirect('/forum/login')
+        return redirect('/login')
 
     try:
         post = Post.objects.get(id=post_id)
         if post.id != post_id:
-            return redirect('/forum')
+            return redirect('/')
     except Post.DoesNotExist:
-        return redirect('/forum')
+        return redirect('/')
 
     error = None
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def update(request, post_id):
         else:
             post.modification = timezone.now()
             post.save()
-            return redirect('/forum')
+            return redirect('/')
 
     errors = []
     if error is not None:
@@ -86,13 +86,13 @@ def update(request, post_id):
 def delete(request, post_id):
     user = get_user(request)
     if user is None:
-        redirect('/forum/login')
+        redirect('login')
 
     try:
         post = Post.objects.get(id=post_id)
         if post.id != post_id:
-            return redirect('/forum')
+            return redirect('/')
         post.delete()
-        return redirect('/forum')
+        return redirect('/')
     except Post.DoesNotExist:
-        return redirect('/forum')
+        return redirect('/')

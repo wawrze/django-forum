@@ -76,7 +76,7 @@ def user(request, user_id):
 
     stats_owner = User.objects.get(id=user_id)
     if stats_owner is None:
-        return redirect('/forum/login')
+        return redirect('/login')
 
     days = (now() - stats_owner.created).days
     if days == 0:

@@ -8,7 +8,7 @@
     {% if not user is None %}
         <div class="col-2">
             <div class="row justify-content-end p-1">
-                <a class="btn btn-warning btn-sm" href="/forum/post/create/" role="button">new</a>
+                <a class="btn btn-warning btn-sm" href="/post/create/" role="button">new</a>
             </div>
         </div>
     {% endif %}
@@ -18,7 +18,7 @@
     {% for post in posts %}
         <div class="row p-1">
             <div class="col-2">
-                <div class="row"><h5><a href="/forum/stat/user/{{ post.author.id }}"
+                <div class="row"><h5><a href="/stat/user/{{ post.author.id }}"
                                         class="text-white">{{ post.author.username }}</a></h5></div>
                 <div class="row"><small><i>Posted on</i></small></div>
                 <div class="row"><small><i> {{ post.create_date }} </i></small></div>
@@ -34,8 +34,8 @@
                         {% if user.id == post.author.id %}
                             <div class="row justify-content-end">
                                 <a class="btn btn-primary btn-sm mr-1"
-                                   href="/forum/post/{{ post.id }}/update/" role="button">edit</a>
-                                <form action="/forum/post/{{ post.id }}/delete/" method="post">
+                                   href="/post/{{ post.id }}/update/" role="button">edit</a>
+                                <form action="/post/{{ post.id }}/delete/" method="post">
                                     {% csrf_token %}
                                     <input
                                             class="btn btn-outline-danger btn-sm"
