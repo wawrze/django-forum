@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f6d3bbd-0a07-4d47-903f-d26bdbc6c2be" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/forum/static/en.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/forum/static/pl.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/auth/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/auth/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/posts/comments/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/comments/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/posts/comments/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/comments/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/posts/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/posts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/posts/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/posts/update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/stats/general_stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/stats/general_stats.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/templates/stats/user_stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/forum/templates/stats/user_stats.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/comments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/posts.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/posts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/views/stat.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views/stat.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +143,7 @@
       <updated>1584269367275</updated>
       <workItem from="1584269368411" duration="17055000" />
       <workItem from="1584290457303" duration="676000" />
-      <workItem from="1584891778240" duration="14167000" />
+      <workItem from="1584891778240" duration="15290000" />
     </task>
     <servers />
   </component>
