@@ -3,7 +3,8 @@
 {% block header %}
     <div class="col-11">
         <div class="row justify-content-center">
-            <h2>{% block title %}General statistics{% endblock %}</h2>
+            <h2>{% block title %}{% if language == 'pl' %}Statystyki forum{% else %}Forum statistics
+            {% endif %}{% endblock %}</h2>
         </div>
     </div>
 {% endblock %}
@@ -12,7 +13,7 @@
     <table class="container mt-3">
         <tr>
             <td class="td-25"></td>
-            <td><strong>Number of users:</strong></td>
+            <td><strong>{% if language == 'pl' %}Liczba użytkowników{% else %}Number of users{% endif %}:</strong></td>
             <td class="td-right">{{ users_count }}</td>
         </tr>
         <tr>
@@ -21,17 +22,17 @@
             </td>
         </tr>
         <tr>
-            <td class="td-25" rowspan="2"><h3>Posts</h3></td>
-            <td><strong>Number of posts:</strong></td>
+            <td class="td-25" rowspan="2"><h3>{% if language == 'pl' %}Posty{% else %}Posts{% endif %}</h3></td>
+            <td><strong>{% if language == 'pl' %}Liczba postów{% else %}Number of posts{% endif %}:</strong></td>
             <td class="td-right">{{ posts_count }}</td>
         </tr>
         <tr>
-            <td><strong>Posts per day:</strong></td>
+            <td><strong>{% if language == 'pl' %}Postów dziennie{% else %}Posts per day{% endif %}:</strong></td>
             <td class="td-right">{{ posts_per_day }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Posts per user:</strong></td>
+            <td><strong>{% if language == 'pl' %}Postów na użytkownika{% else %}Posts per user{% endif %}:</strong></td>
             <td class="td-right">{{ posts_per_user }}</td>
         </tr>
         <tr>
@@ -40,22 +41,23 @@
             </td>
         </tr>
         <tr>
-            <td class="td-25" rowspan="2"><h3>Comments</h3></td>
-            <td><strong>Number of comments:</strong></td>
+            <td class="td-25" rowspan="2"><h3>{% if language == 'pl' %}Komentarze{% else %}Comments{% endif %}</h3></td>
+            <td><strong>{% if language == 'pl' %}Liczba komentarzy{% else %}Number of comments{% endif %}:</strong></td>
             <td class="td-right">{{ comments_count }}</td>
         </tr>
         <tr>
-            <td><strong>Comments per day:</strong></td>
+            <td><strong>{% if language == 'pl' %}Komentarzy dziennie{% else %}Comments per day{% endif %}:</strong></td>
             <td class="td-right">{{ comments_per_day }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Comments per user:</strong></td>
+            <td><strong>{% if language == 'pl' %}Komentarzy na użytkownika{% else %}Comments per user{% endif %}
+                :</strong></td>
             <td class="td-right">{{ comments_per_user }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Comments per post:</strong></td>
+            <td><strong>{% if language == 'pl' %}Komentarzy na post{% else %}Comments per post{% endif %}:</strong></td>
             <td class="td-right">{{ comments_per_post }}</td>
         </tr>
         <tr>
@@ -64,22 +66,23 @@
             </td>
         </tr>
         <tr>
-            <td class="td-25" rowspan="2"><h3>Words</h3></td>
-            <td><strong>Number of words:</strong></td>
+            <td class="td-25" rowspan="2"><h3>{% if language == 'pl' %}Słowa{% else %}Words{% endif %}</h3></td>
+            <td><strong>{% if language == 'pl' %}Liczba słów{% else %}Number of words{% endif %}:</strong></td>
             <td class="td-right">{{ words_count }}</td>
         </tr>
         <tr>
-            <td><strong>Words per post/comment:</strong></td>
+            <td><strong>{% if language == 'pl' %}Słów na post/komentarz{% else %}Words per post/comment{% endif %}
+                :</strong></td>
             <td class="td-right">{{ words_per_post_and_comment }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Words per day:</strong></td>
+            <td><strong>{% if language == 'pl' %}Słów dziennie{% else %}Words per day{% endif %}:</strong></td>
             <td class="td-right">{{ words_per_day }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Words per user:</strong></td>
+            <td><strong>{% if language == 'pl' %}Słów na użytkownika{% else %}Words per user{% endif %}:</strong></td>
             <td class="td-right">{{ words_per_user }}</td>
         </tr>
         <tr>
@@ -88,22 +91,24 @@
             </td>
         </tr>
         <tr>
-            <td class="td-25" rowspan="2"><h3>Characters</h3></td>
-            <td><strong>Number of characters:</strong></td>
+            <td class="td-25" rowspan="2"><h3>{% if language == 'pl' %}Znaki{% else %}Characters{% endif %}</h3></td>
+            <td><strong>{% if language == 'pl' %}Liczba znaków{% else %}Number of characters{% endif %}:</strong></td>
             <td class="td-right">{{ chars_count }}</td>
         </tr>
         <tr>
-            <td><strong>Characters per post/comment:</strong></td>
+            <td><strong>{% if language == 'pl' %}Znaków na post/komentarz{% else %}Characters per
+                post/comment{% endif %}:</strong></td>
             <td class="td-right">{{ chars_per_post_and_comment }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Characters per day:</strong></td>
+            <td><strong>{% if language == 'pl' %}Znaków dziennie{% else %}Characters per day{% endif %}:</strong></td>
             <td class="td-right">{{ chars_per_day }}</td>
         </tr>
         <tr>
             <td class="td-25"></td>
-            <td><strong>Characters per user:</strong></td>
+            <td><strong>{% if language == 'pl' %}Znaków na użytkownika{% else %}Characters per user{% endif %}:</strong>
+            </td>
             <td class="td-right">{{ chars_per_user }}</td>
         </tr>
     </table>

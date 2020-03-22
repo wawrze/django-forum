@@ -3,7 +3,7 @@
 {% block header %}
     <div class="col-11 ">
         <div class="row justify-content-center">
-            <h2>{% block title %}Log In{% endblock %}</h2>
+            <h2>{% block title %}{% if language == 'pl' %}Logowanie{% else %}Log in{% endif %}{% endblock %}</h2>
         </div>
     </div>
 {% endblock %}
@@ -15,7 +15,7 @@
             <div class="col-2"></div>
             <div class="col-2">
                 <div class="row justify-content-end">
-                    <label for="username"><b>Login</b></label>
+                    <label for="username"><b>{% if language == 'pl' %}Login{% else %}Login{% endif %}</b></label>
                 </div>
             </div>
             <div class="col-4">
@@ -24,7 +24,7 @@
                         type="text"
                         class="form-control"
                         id="username"
-                        placeholder="Enter login"
+                        placeholder="{% if language == 'pl' %}Wprowadź login{% else %}Enter login{% endif %}"
                         required
                 >
             </div>
@@ -34,7 +34,7 @@
             <div class="col-2"></div>
             <div class="col-2">
                 <div class="row justify-content-end">
-                    <label for="password"><b>Password</b></label>
+                    <label for="password"><b>{% if language == 'pl' %}Hasło{% else %}Password{% endif %}</b></label>
                 </div>
             </div>
             <div class="col-4">
@@ -43,7 +43,7 @@
                         type="password"
                         class="form-control"
                         id="password"
-                        placeholder="Enter password"
+                        placeholder="{% if language == 'pl' %}Wprowadź hasło{% else %}Enter password{% endif %}"
                         required
                 >
             </div>
@@ -52,7 +52,8 @@
         <div class="row align-items-center mt-1">
             <div class="col-4"></div>
             <div class="col-4">
-                <input type="submit" class="btn btn-outline-primary btn-sm" value="log in">
+                <input type="submit" class="btn btn-outline-primary btn-sm"
+                       value="{% if language == 'pl' %}zaloguj{% else %}log in{% endif %}">
             </div>
             <div class="col-4"></div>
         </div>

@@ -3,7 +3,8 @@
 {% block header %}
     <div class="col-11 ">
         <div class="row justify-content-center">
-            <h2>{% block title %}Edit{% endblock %} <small class="quote">{{ post.title }}</small></h2>
+            <h2>{% block title %}{% if language == 'pl' %}Edycja posta{% else %}Edit{% endif %}{% endblock %} <small
+                    class="quote">{{ post.title }}</small></h2>
         </div>
     </div>
 {% endblock %}
@@ -14,7 +15,7 @@
         <div class="row">
             <div class="col-2">
                 <div class="row justify-content-end">
-                    <label for="title"><b>Title</b></label>
+                    <label for="title"><b>{% if language == 'pl' %}Tytuł{% else %}Title{% endif %}</b></label>
                 </div>
             </div>
             <div class="col-10">
@@ -23,7 +24,7 @@
                         type="text"
                         class="form-control"
                         id="title"
-                        placeholder="Enter post title"
+                        placeholder="{% if language == 'pl' %}Wprowadź tytuł posta{% else %}Enter post title{% endif %}"
                         value="{{ post.title }}"
                         required
                 >
@@ -32,18 +33,19 @@
         <div class="row">
             <div class="col-2">
                 <div class="row justify-content-end">
-                    <label for="body"><b>Body</b></label>
+                    <label for="body"><b>{% if language == 'pl' %}Treść{% else %}Body{% endif %}</b></label>
                 </div>
             </div>
             <div class="col-10">
                 <textarea name="body" class="form-control" id="body" rows="5"
-                          placeholder="Enter post body">{{ post.body }}</textarea>
+                          placeholder="{% if language == 'pl' %}Wprowadź treść posta{% else %}Enter post body{% endif %}">{{ post.body }}</textarea>
             </div>
         </div>
         <div class="row align-items-center mt-1">
             <div class="col-2"></div>
             <div class="col-10">
-                <input type="submit" class="btn btn-warning btn-sm" value="save">
+                <input type="submit" class="btn btn-warning btn-sm"
+                       value="{% if language == 'pl' %}zapisz{% else %}save{% endif %}">
             </div>
         </div>
     </form>

@@ -15,7 +15,26 @@ def get_user(request):
     return user
 
 
+def get_language(request):
+    try:
+        language = request.session['language']
+    except KeyError:
+        language = None
+    return language
+
+
+def set_lang_pl(request):
+    request.session['language'] = 'pl'
+    return redirect('/')
+
+
+def set_lang_en(request):
+    request.session['language'] = 'en'
+    return redirect('/')
+
+
 def register(request):
+    language = get_language(request)
     template = loader.get_template('auth/register.html')
     error = None
 
@@ -24,11 +43,20 @@ def register(request):
         password = request.POST['password']
 
         if not username:
-            error = 'Username is required.'
+            if language == 'pl':
+                error = 'Musisz podać nazwę użytkownik.'
+            else:
+                error = 'Username is required.'
         elif not password:
-            error = 'Password is required.'
+            if language == 'pl':
+                error = 'Musisz podać hasło.'
+            else:
+                error = 'Password is required.'
         elif User.objects.filter(username=username).count() > 0:
-            error = 'User {} is already registered.'.format(username)
+            if language == 'pl':
+                error = 'Użytkownik {} jest już zarejestrowany.'.format(username)
+            else:
+                error = 'User {} is already registered.'.format(username)
 
         if error is None:
             user = User(username=username, password=pwd_helper.hash_password(password))
@@ -40,13 +68,15 @@ def register(request):
         errors.append(error)
     context = {
         'error_messages': errors,
-        'user': None
+        'user': None,
+        'language': language
     }
 
     return HttpResponse(template.render(context, request))
 
 
 def login(request):
+    language = get_language(request)
     template = loader.get_template('auth/login.html')
     error = None
 
@@ -56,9 +86,15 @@ def login(request):
         user = User.objects.get(username=username)
 
         if user is None:
-            error = 'Incorrect username.'
+            if language == 'pl':
+                error = 'Nieprawidłowa nazwa użytkownika.'
+            else:
+                error = 'Incorrect username.'
         elif not pwd_helper.verify_password(stored_password=user.password, provided_password=password):
-            error = 'Incorrect password.'
+            if language == 'pl':
+                error = 'Nieprawidłowe hasło.'
+            else:
+                error = 'Incorrect password.'
         if error is None:
             request.session.clear()
             request.session['user_id'] = user.id
@@ -69,7 +105,8 @@ def login(request):
         errors.append(error)
     context = {
         'error_messages': errors,
-        'user': None
+        'user': None,
+        'language': language
     }
 
     return HttpResponse(template.render(context, request))

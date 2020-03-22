@@ -3,10 +3,11 @@ from django.shortcuts import redirect
 from django.template import loader
 
 from forum.models import *
-from forum.views.auth import get_user
+from forum.views.auth import get_user, get_language
 
 
 def general(request):
+    language = get_language(request)
     logged_user = get_user(request)
 
     try:
@@ -77,11 +78,13 @@ def general(request):
         'chars_per_post_and_comment': chars_per_post_and_comment,
         'chars_per_day': chars_per_day,
         'chars_per_user': chars_per_user,
+        'language': language
     }
     return HttpResponse(template.render(context, request))
 
 
 def user(request, user_id):
+    language = get_language(request)
     logged_user = get_user(request)
 
     stats_owner = User.objects.get(id=user_id)
@@ -139,6 +142,7 @@ def user(request, user_id):
         'words_per_post_and_comment': words_per_post_and_comment,
         'words_per_day': words_per_day,
         'chars_per_post_and_comment': chars_per_post_and_comment,
-        'chars_per_day': chars_per_day
+        'chars_per_day': chars_per_day,
+        'language': language
     }
     return HttpResponse(template.render(context, request))

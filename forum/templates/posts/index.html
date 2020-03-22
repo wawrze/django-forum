@@ -2,13 +2,14 @@
 {% block header %}
     <div class="col-10">
         <div class="row justify-content-center">
-            <h2>{% block title %}Posts{% endblock %}</h2>
+            <h2>{% block title %}{% if language == 'pl' %}Posty{% else %}Posts{% endif %}{% endblock %}</h2>
         </div>
     </div>
     {% if not user is None %}
         <div class="col-2">
             <div class="row justify-content-end p-1">
-                <a class="btn btn-warning btn-sm" href="/post/create/" role="button">new</a>
+                <a class="btn btn-warning btn-sm" href="/post/create/" role="button">{% if language == 'pl' %}
+                    dodaj{% else %}add{% endif %}</a>
             </div>
         </div>
     {% endif %}
@@ -20,10 +21,12 @@
             <div class="col-2">
                 <div class="row"><h5><a href="/stat/user/{{ post.author.id }}"
                                         class="text-white">{{ post.author.username }}</a></h5></div>
-                <div class="row"><small><i>Posted on</i></small></div>
+                <div class="row"><small><i>{% if language == 'pl' %}Utworzony{% else %}Posted on{% endif %}</i></small>
+                </div>
                 <div class="row"><small><i> {{ post.create_date }} </i></small></div>
                 {% if post.modification %}
-                    <div class="row mt-1"><small><i>Last modified on</i></small></div>
+                    <div class="row mt-1"><small><i>{% if language == 'pl' %}Ostatnio zmodyfikowany{% else %}Last
+                        modified on{% endif %}</i></small></div>
                     <div class="row"><small><i> {{ post.modified }} </i></small></div>
                 {% endif %}
             </div>
@@ -34,15 +37,16 @@
                         {% if user.id == post.author.id %}
                             <div class="row justify-content-end">
                                 <a class="btn btn-primary btn-sm mr-1"
-                                   href="/post/{{ post.id }}/update/" role="button">edit</a>
+                                   href="/post/{{ post.id }}/update/" role="button">{% if language == 'pl' %}
+                                    edytuj{% else %}edit{% endif %}</a>
                                 <form action="/post/{{ post.id }}/delete/" method="post">
                                     {% csrf_token %}
                                     <input
                                             class="btn btn-outline-danger btn-sm"
                                             role="button"
                                             type="submit"
-                                            onclick="return confirm('Are you sure?');"
-                                            value="delete"
+                                            onclick="return confirm({% if language == 'pl' %}'Jesteś pewien?';{% else %}'Are you shure?';{% endif %})"
+                                            value="{% if language == 'pl' %}usuń{% else %}delete{% endif %}"
                                     >
                                 </form>
                             </div>
@@ -56,32 +60,36 @@
                     <div class="row justify-content-end">
                         <a class="btn btn-outline-warning btn-sm" href="/post/{{ post.id }}/comments/add"
                            role="button">
-                            comment
+                            {% if language == 'pl' %}komentuj{% else %}comment{% endif %}
                         </a>
                     </div>
                 {% endif %}
                 {% if post.comment_count > 0 %}
                     <hr/>
                     <div>
-                        <h6>Comments:</h6>
+                        <h6>{% if language == 'pl' %}Komentarze{% else %}Comments{% endif %}:</h6>
                         {% for comment in post.comment_set.all %}
                             <hr/>
                             <div class="row small">{{ comment.body }}</div>
                             <br/>
                             <div class="row">
                                 <div class="col-8">
-                                    <small><i>Posted on {{ comment.create_date }}
-                                        by {{ comment.author.username }}</i></small>
+                                    <small><i>{% if language == 'pl' %}Utworzony{% else %}Posted
+                                        on{% endif %} {{ comment.create_date }}
+                                        {% if language == 'pl' %}przez{% else %}
+                                            by{% endif %} {{ comment.author.username }}</i></small>
                                     <br/>
                                     {% if comment.modification %}
-                                        <small><i>Last modified on {{ comment.modified }}</i></small>
+                                        <small><i>{% if language == 'pl' %}Ostatnio zmodyfikowany{% else %}Last modified
+                                            on{% endif %} {{ comment.modified }}</i></small>
                                     {% endif %}
                                 </div>
                                 <div class="col-4">
                                     {% if user.id == comment.author.id %}
                                         <div class="row justify-content-end">
                                             <a class="btn btn-primary btn-sm mr-1"
-                                               href="/post/{{ post.id }}/comments/{{ comment.id }}/edit" role="button">edit</a>
+                                               href="/post/{{ post.id }}/comments/{{ comment.id }}/edit" role="button">
+                                                {% if language == 'pl' %}edytuj{% else %}edit{% endif %}</a>
                                             <form action="/post/{{ post.id }}/comments/{{ comment.id }}/delete"
                                                   method="post">
                                                 {% csrf_token %}
@@ -89,8 +97,8 @@
                                                         class="btn btn-outline-danger btn-sm"
                                                         role="button"
                                                         type="submit"
-                                                        onclick="return confirm('Are you sure?');"
-                                                        value="delete"
+                                                        onclick="return confirm({% if language == 'pl' %}'Jesteś pewien?';{% else %}'Are you shure?';{% endif %})"
+                                                        value="{% if language == 'pl' %}usuń{% else %}delete{% endif %}"
                                                 >
                                             </form>
                                         </div>

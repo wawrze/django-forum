@@ -4,20 +4,23 @@ from django.template import loader
 from django.utils import timezone
 
 from forum.models import Post
-from forum.views.auth import get_user
+from forum.views.auth import get_user, get_language
 
 
 def index(request):
+    language = get_language(request)
     posts = Post.objects.order_by('-created')
     template = loader.get_template('posts/index.html')
     context = {
         'posts': posts,
-        'user': get_user(request)
+        'user': get_user(request),
+        'language': language
     }
     return HttpResponse(template.render(context, request))
 
 
 def create(request):
+    language = get_language(request)
     user = get_user(request)
     if user is None:
         redirect('/login')
@@ -29,7 +32,10 @@ def create(request):
         title = request.POST['title']
         body = request.POST['body']
         if not title:
-            error = 'Title is required.'
+            if language == 'pl':
+                error = 'Musisz podac tytuł.'
+            else:
+                error = 'Title is required.'
         else:
             post = Post(title=title, body=body, author=user)
             post.save()
@@ -43,12 +49,14 @@ def create(request):
         'user': user,
         'errors': errors,
         'title': title,
-        'body': body
+        'body': body,
+        'language': language
     }
     return HttpResponse(template.render(context, request))
 
 
 def update(request, post_id):
+    language = get_language(request)
     user = get_user(request)
     if user is None:
         return redirect('/login')
@@ -65,7 +73,10 @@ def update(request, post_id):
         post.title = request.POST['title']
         post.body = request.POST['body']
         if not post.title:
-            error = 'Title is required.'
+            if language == 'pl':
+                error = 'Musisz podac tytuł.'
+            else:
+                error = 'Title is required.'
         else:
             post.modification = timezone.now()
             post.save()
@@ -78,7 +89,8 @@ def update(request, post_id):
     context = {
         'user': user,
         'errors': errors,
-        'post': post
+        'post': post,
+        'language': language
     }
     return HttpResponse(template.render(context, request))
 

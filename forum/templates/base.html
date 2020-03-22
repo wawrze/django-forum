@@ -9,7 +9,7 @@
             <div class="col-8">
                 <h6>
                     <i>
-                        Hello,
+                        {% if language == 'pl' %}Witaj{% else %}Hello{% endif %},
                         <a href="/stat/user/{{ user.id }}" class="text-white">
                             {{ user.username }}</a>!
                     </i>
@@ -17,8 +17,10 @@
             </div>
             <div class="col-4">
                 <div class="row justify-content-end">
+                    <a href="/set/pl" class="mr-1"><img src="{% static 'pl.jpg' %}" alt=""></a>
+                    <a href="/set/en" class="mr-1"><img src="{% static 'en.jpg' %}" alt=""></a>
                     <a class="btn btn-outline-primary btn-sm" href="/logout/" role="button">
-                        log out
+                        {% if language == 'pl' %}wyloguj{% else %}log out{% endif %}
                     </a>
                 </div>
             </div>
@@ -26,10 +28,13 @@
             <div class="col-8"></div>
             <div class="col-4">
                 <div class="row justify-content-end">
+                    <a href="/set/pl" class="mr-1"><img src="{% static 'pl.jpg' %}" alt=""></a>
+                    <a href="/set/en" class="mr-1"><img src="{% static 'en.jpg' %}" alt=""></a>
+                    <a href="/"></a>
                     <a class="btn btn-primary btn-sm mr-1" href="/register/"
-                       role="button">register</a>
+                       role="button">{% if language == 'pl' %}zarejestruj{% else %}register{% endif %}</a>
                     <a class="btn btn-outline-primary btn-sm" href="/login/" role="button">
-                        log in
+                        {% if language == 'pl' %}zaloguj{% else %}log in{% endif %}
                     </a>
                 </div>
             </div>
@@ -51,7 +56,7 @@
         <div class="col-2">
             <div class="row justify-content-end pt-1 pb-1">
                 <a class="btn btn-outline-warning btn-sm" href="/stat/general/"
-                   role="button">statistics</a>
+                   role="button">{% if language == 'pl' %}statystyki{% else %}statistics{% endif %}</a>
             </div>
         </div>
     </div>

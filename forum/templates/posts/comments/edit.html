@@ -3,7 +3,8 @@
 {% block header %}
     <div class="col-11 ">
         <div class="row justify-content-center">
-            <h2>{% block title %}Edit comment{% endblock %}</h2>
+            <h2>{% block title %}{% if language == 'pl' %}Edycja komentarza{% else %}Edit comment
+            {% endif %}{% endblock %}</h2>
         </div>
     </div>
 {% endblock %}
@@ -14,10 +15,12 @@
             <div class="row">
                 <h5><a href="/stat/user/{{ post.author.id }}" class="text-white">{{ post.author.username }}</a></h5>
             </div>
-            <div class="row"><small><i>Posted on</i></small></div>
+            <div class="row"><small><i>{% if language == 'pl' %}Utworzony{% else %}Posted on{% endif %}</i></small>
+            </div>
             <div class="row"><small><i> {{ post.create_date }} </i></small></div>
             {% if post.modification %}
-                <div class="row mt-1"><small><i>Last modified on</i></small></div>
+                <div class="row mt-1"><small><i>{% if language == 'pl' %}Ostatnio zmodyfikowany{% else %}Last modified
+                    on{% endif %}</i></small></div>
                 <div class="row"><small><i> {{ post.modified }} </i></small></div>
             {% endif %}
         </div>
@@ -30,7 +33,7 @@
             {% if post.comment_count > 0 %}
                 <hr/>
                 <div>
-                    <h6>Comments:</h6>
+                    <h6>{% if language == 'pl' %}Komentarze{% else %}Comments{% endif %}:</h6>
                     {% for c in post.comment_set.all %}
                         {% if c.id != comment.id %}
                             <hr/>
@@ -38,11 +41,14 @@
                             <br/>
                             <div class="row">
                                 <div class="col-8">
-                                    <small><i>Posted on {{ c.create_date }}
-                                        by {{ c.author.username }}</i></small>
+                                    <small><i>{% if language == 'pl' %}Utworzony{% else %}Posted
+                                        on{% endif %} {{ comment.create_date }}
+                                        {% if language == 'pl' %}przez{% else %}
+                                            by{% endif %} {{ comment.author.username }}</i></small>
                                     <br/>
-                                    {% if c.modification %}
-                                        <small><i>Last modified on {{ c.modified }}</i></small>
+                                    {% if comment.modification %}
+                                        <small><i>{% if language == 'pl' %}Ostatnio zmodyfikowany {% else %}Last
+                                            modified on {% endif %} {{ comment.modified }}</i></small>
                                     {% endif %}
                                 </div>
                             </div>
@@ -59,18 +65,19 @@
         <div class="row">
             <div class="col-2">
                 <div class="row justify-content-end">
-                    <label for="body"><b>Comment</b></label>
+                    <label for="body"><b>{% if language == 'pl' %}Komentarz{% else %}Comment{% endif %}</b></label>
                 </div>
             </div>
             <div class="col-10">
                 <textarea name="body" class="form-control" id="body" rows="5"
-                          placeholder="Enter post body">{{ comment.body }}</textarea>
+                          placeholder="{% if language == 'pl' %}Wpisz treść komentarza{% else %}Enter comment{% endif %}">{{ comment.body }}</textarea>
             </div>
         </div>
         <div class="row align-items-center mt-1">
             <div class="col-2"></div>
             <div class="col-10">
-                <input type="submit" class="btn btn-warning btn-sm" value="save">
+                <input type="submit" class="btn btn-warning btn-sm"
+                       value="{% if language == 'pl' %}zapisz{% else %}save{% endif %}">
             </div>
         </div>
     </form>

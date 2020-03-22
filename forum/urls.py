@@ -14,5 +14,7 @@ urlpatterns = [
     path('post/<int:post_id>/delete/', posts.delete, name='delete'),
     path('post/<int:post_id>/comments/add', comments.add, name='add'),
     path('post/<int:post_id>/comments/<int:comment_id>/edit', comments.edit, name='add'),
-    path('post/<int:post_id>/comments/<int:comment_id>/delete', comments.delete, name='add')
+    path('post/<int:post_id>/comments/<int:comment_id>/delete', comments.delete, name='add'),
+    path('set/pl', auth.set_lang_pl, name='set_pl'),
+    path('set/en', auth.set_lang_en, name='set_en')
 ]
