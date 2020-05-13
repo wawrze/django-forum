@@ -87,7 +87,7 @@ def user(request, user_id):
     language = get_language(request)
     logged_user = get_user(request)
 
-    stats_owner = User.objects.get(id=user_id)
+    stats_owner = User.objects.filter(id=user_id).first()
     if stats_owner is None:
         return redirect('/login')
 
@@ -126,6 +126,7 @@ def user(request, user_id):
     chars_per_post_and_comment = round(user_chars_count / (user_posts_count + user_comments_count), 2)
     chars_per_day = round(user_chars_count / days, 2)
     comments_per_day = round(user_comments_count / days, 2)
+    user_create_date = stats_owner.created.strftime('%Y-%m-%d %H:%M')
 
     template = loader.get_template('stats/user_stats.html')
     context = {
@@ -143,6 +144,7 @@ def user(request, user_id):
         'words_per_day': words_per_day,
         'chars_per_post_and_comment': chars_per_post_and_comment,
         'chars_per_day': chars_per_day,
+        'user_create_date': user_create_date,
         'language': language
     }
     return HttpResponse(template.render(context, request))

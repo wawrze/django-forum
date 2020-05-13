@@ -3,13 +3,13 @@ from django.shortcuts import redirect
 from django.template import loader
 
 from forum import pwd_helper
-from forum.models import User
+from forum.models import User, UserSettings
 
 
 def get_user(request):
     try:
         user_id = request.session['user_id']
-        user = User.objects.get(id=user_id)
+        user = User.objects.filter(id=user_id).first()
     except KeyError:
         user = None
     return user
@@ -27,12 +27,12 @@ def set_lang_pl(request):
     request.session['language'] = 'pl'
     try:
         user_id = request.session['user_id']
-        user = User.objects.get(id=user_id)
+        user = User.objects.filter(id=user_id).first()
     except KeyError:
         user = None
     if user is not None:
-        user.language = 'pl'
-        user.save()
+        user_settings = UserSettings(user=user, language='pl')
+        user_settings.save()
     return redirect('/')
 
 
@@ -40,7 +40,7 @@ def set_lang_en(request):
     request.session['language'] = 'en'
     try:
         user_id = request.session['user_id']
-        user = User.objects.get(id=user_id)
+        user = User.objects.filter(id=user_id).first()
     except KeyError:
         user = None
     if user is not None:
@@ -99,7 +99,7 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = User.objects.get(username=username)
+        user = User.objects.filter(username=username).first()
 
         if user is None:
             if language == 'pl':
@@ -114,7 +114,9 @@ def login(request):
         if error is None:
             request.session.clear()
             request.session['user_id'] = user.id
-            request.session['language'] = user.language
+            user_settings = UserSettings.objects.filter(user=user).first()
+            if user_settings is not None:
+                request.session['language'] = user_settings.language
             return redirect('/')
 
     errors = []
