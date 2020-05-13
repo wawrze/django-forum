@@ -32,7 +32,10 @@ def set_lang_pl(request):
     except KeyError:
         user = None
     if user is not None:
-        user_settings = UserSettings(user=user, language='pl')
+        user_settings = UserSettings.objects.filter(user=user).first()
+        if user_settings is None:
+            user_settings = UserSettings(user=user)
+        user_settings.language = 'pl'
         user_settings.save()
     return redirect('/')
 
@@ -45,8 +48,11 @@ def set_lang_en(request):
     except KeyError:
         user = None
     if user is not None:
-        user.language = 'en'
-        user.save()
+        user_settings = UserSettings.objects.filter(user=user).first()
+        if user_settings is None:
+            user_settings = UserSettings(user=user)
+        user_settings.language = 'en'
+        user_settings.save()
     return redirect('/')
 
 
@@ -78,6 +84,8 @@ def register(request):
         if error is None:
             user = User(username=username, password=make_password(password))
             user.save()
+            user_settings = UserSettings(user=user, language=get_language(request))
+            user_settings.save()
             return redirect('/login/')
 
     errors = []
