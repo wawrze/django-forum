@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
 
 from forum import pwd_helper
-from forum.models import User, UserSettings
+from forum.models import UserSettings
 
 
 def get_user(request):
