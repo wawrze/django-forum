@@ -1,9 +1,9 @@
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
 
-from forum import pwd_helper
 from forum.models import UserSettings
 
 
@@ -76,7 +76,7 @@ def register(request):
                 error = 'User {} is already registered.'.format(username)
 
         if error is None:
-            user = User(username=username, password=pwd_helper.hash_password(password))
+            user = User(username=username, password=make_password(password))
             user.save()
             return redirect('/login/')
 
@@ -107,7 +107,7 @@ def login(request):
                 error = 'Nieprawidłowa nazwa użytkownika.'
             else:
                 error = 'Incorrect username.'
-        elif not pwd_helper.verify_password(stored_password=user.password, provided_password=password):
+        elif not check_password(password, user.password):
             if language == 'pl':
                 error = 'Nieprawidłowe hasło.'
             else:

@@ -1,9 +1,11 @@
+from django.contrib import admin
 from django.urls import path
 
 from forum.views import stat, auth, posts, comments
 
 urlpatterns = [
     path('', posts.index, name='index'),
+    path('admin/', admin.site.urls),
     path('register/', auth.register, name='register'),
     path('login/', auth.login, name='login'),
     path('logout/', auth.logout, name='logout'),
